@@ -10,7 +10,7 @@ export default function App() {
 
   
   const apiKeyPIXABAY = import.meta.env.VITE_PIXABAY_API_KEY 
-  const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY
+
 
 
   const getCityPics = async () => {
@@ -29,18 +29,7 @@ export default function App() {
      
   }
 
-    const getCityNames = async () => {
-    try {
-      const response = await fetch(`http://api.geonames.org/citiesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&lang=de&username=${apiKeyGEONAMES}`
-      );
-     const data = await response.json();
-      console.log(data)
-      setContinent(data.geonames[nameIndex].toponymName);
-      console.log(continent);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+   
     
 
     function handleClick() {
