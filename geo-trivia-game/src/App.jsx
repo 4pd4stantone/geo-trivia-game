@@ -1,13 +1,15 @@
+import Nav from './Nav'
+import Population from './Population'
 
 
-function App() {
- 
+export default function App() {
 
   return (
-    <>
-   
-    </>
+      <>
+        <Nav />
+        <Population />
+      </>
   )
-}
 
-export default App
+
+}
