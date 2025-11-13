@@ -52,7 +52,13 @@ export default function Population() {
   }
   const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
 
-
+  function shuffleArray(citiesArray) {
+    for (let i = citiesArray.length - 1; i  > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [citiesArray[i], citiesArray[j]] = [citiesArray[j], citiesArray[i]]
+    }
+    return setCities(citiesArray), console.log(cities)
+  }
 
   const getCityNames = async ({north, south, east, west}) => {
     try {
@@ -62,7 +68,7 @@ export default function Population() {
       const data = await response.json();
       const citiesArray = data.geonames.map((city) => city.toponymName)
       console.log(citiesArray)
-      return setCities(citiesArray);
+      return shuffleArray(citiesArray);
     } catch (e) {
       console.error(e);
     }
