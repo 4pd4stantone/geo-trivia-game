@@ -2,15 +2,26 @@
 nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   outline:  2px #1d3843 solid;
   background-color: #f7eed2;
 }
-
+header {
+  display: flex;
+  align-items: center;
+}
 #geo-trivia-logo {
-  width: 90px;
+  width: 80px;
 }
 
+#timer {
+  height: 50px;
+  margin: 10px 0 0 10px;
+}
+#score {
+  height: 50px;
+  margin: 10px 10px 0 0;
+}
 #name-title-subtitle {
   display: block;
   justify-items: center;

@@ -228,7 +228,9 @@ export default function Population() {
           })}
         </section>
       )}
-      <section id="pop-img-section">
+    
+      {game ?
+      ( <section id="pop-img-section">
         <div>
           <img src={largePop} alt="Large Population" className="pop-img"/>
         </div>
@@ -238,7 +240,10 @@ export default function Population() {
         <div>
           <img src={smallPop} alt="Small Population" className="pop-img"/>
         </div>
-      </section>
+      </section>)
+      : 
+      ("")
+      }
     </main>
   );
 }
