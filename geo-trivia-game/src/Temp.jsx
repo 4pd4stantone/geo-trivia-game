@@ -9,25 +9,11 @@ export default function App() {
   const [nameIndex, setNameIndex] = useState(0)
 
   
-  const apiKeyPIXABAY = import.meta.env.VITE_PIXABAY_API_KEY 
+  
 
 
 
-  const getCityPics = async () => {
-    try {
-      const response = await fetch(`https://pixabay.com/api/?key=${apiKeyPIXABAY}&category=places&q=new+york&image_type=photo&safesearch=true`
-      );
-      const data = await response.json();
-      console.log(data)
-      const imgIndex = index
-      // const cityImg = data.hits[6].largeImageURL;
-      setCities(data.hits[imgIndex].largeImageURL);
-      console.log(cities);
-    } catch (e) {
-      console.error(e);
-    }
-     
-  }
+  
 
    
     

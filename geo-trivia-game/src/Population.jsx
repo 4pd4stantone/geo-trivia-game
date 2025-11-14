@@ -51,15 +51,17 @@ export default function Population() {
     const coords = coordinates[selected]
     getCityNames(coords);
   }
-  const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
 
-  function shuffleArray(citiesArray) {
-    for (let i = citiesArray.length - 1; i  > 0; i--) {
+
+  function shuffleArray(citiesWithImg) {
+    for (let i = citiesWithImg.length - 1; i  > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [citiesArray[i], citiesArray[j]] = [citiesArray[j], citiesArray[i]]
+        [citiesWithImg[i], citiesWithImg[j]] = [citiesWithImg[j], citiesWithImg[i]]
     }
-    return setCities(citiesArray)
+    return setCities(citiesWithImg)
   }
+
+  const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
 
   const getCityNames = async ({north, south, east, west}) => {
     try {
@@ -68,12 +70,31 @@ export default function Population() {
       );
       const data = await response.json();
       const citiesArray = data.geonames.map((city, i) => ({cityName: city.toponymName, populationSize: city.population}))
-      console.log(citiesArray)
-      return shuffleArray(citiesArray);
+      console.log(citiesArray);
+      const citiesWithImg = await Promise.all(citiesArray.map(async (cityObject) => {
+        const imgUrl = await getCityPics(cityObject.cityName);
+        return {...cityObject, imageUrl: imgUrl}
+      }))
+      return shuffleArray(citiesWithImg);
     } catch (e) {
       console.error(e);
     }
   };
+
+  const apiKeyPIXABAY = import.meta.env.VITE_PIXABAY_API_KEY 
+
+  const getCityPics = async (cityName) => {
+    try {
+      const response = await fetch(`https://pixabay.com/api/?key=${apiKeyPIXABAY}&category=places&q=${cityName}&image_type=photo&safesearch=true`
+      );
+      const data = await response.json();
+      console.log(data)
+      console.log(data?.hits[0]?.webformatURL )
+      return data?.hits[0]?.webformatURL ?? null;
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   useEffect(() => {
       console.log(continent);
@@ -136,8 +157,8 @@ export default function Population() {
           } else {
             return (
                 <div key={city.cityName} className="img-name-box"><span className="number">{i +1}</span>
-                  <img src={logo} alt="" className="img-box" />
-                  {false ? <p className="city-name">{city.cityName}</p> :
+                  <img src={city.imageUrl || logo} alt="" className="img-box" style={city.imageUrl ? {} : {objectFit: "contain"}}/>
+                  { true ? <p className="city-name">{city.cityName}</p> :
                   <p className="city-name">{city.populationSize.toLocaleString()}</p>}
                 </div>
             )
