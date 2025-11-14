@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import logo from './assets/geo-trivia-logo.png'
+import logo from "./assets/geo-trivia-logo.png";
 
 export default function Population() {
   const [continent, setContinent] = useState(null);
-  const [cities, setCities] = useState([])
+  const [cities, setCities] = useState([]);
+  const [game, setGame] = useState(false);
 
   const coordinates = {
     europe: {
@@ -48,57 +49,68 @@ export default function Population() {
     console.log(continent);
     const selected = e.target.name;
     setContinent(selected);
-    const coords = coordinates[selected]
+    const coords = coordinates[selected];
     getCityNames(coords);
+    console.log(game);
+    setGame(true);
   }
-
+  console.log(game);
 
   function shuffleArray(citiesWithImg) {
-    for (let i = citiesWithImg.length - 1; i  > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [citiesWithImg[i], citiesWithImg[j]] = [citiesWithImg[j], citiesWithImg[i]]
+    for (let i = citiesWithImg.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [citiesWithImg[i], citiesWithImg[j]] = [
+        citiesWithImg[j],
+        citiesWithImg[i],
+      ];
     }
-    return setCities(citiesWithImg)
+    return setCities(citiesWithImg);
   }
 
   const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
 
-  const getCityNames = async ({north, south, east, west}) => {
+  const getCityNames = async ({ north, south, east, west }) => {
     try {
       const response = await fetch(
         `http://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=de&username=${apiKeyGEONAMES}`
       );
       const data = await response.json();
-      const citiesArray = data.geonames.map((city, i) => ({cityName: city.toponymName, populationSize: city.population}))
+      const citiesArray = data.geonames.map((city, i) => ({
+        cityName: city.toponymName,
+        populationSize: city.population,
+      }));
       console.log(citiesArray);
-      const citiesWithImg = await Promise.all(citiesArray.map(async (cityObject) => {
-        const imgUrl = await getCityPics(cityObject.cityName);
-        return {...cityObject, imageUrl: imgUrl}
-      }))
+      const citiesWithImg = await Promise.all(
+        citiesArray.map(async (cityObject) => {
+          const imgUrl = await getCityPics(cityObject.cityName);
+          return { ...cityObject, imageUrl: imgUrl };
+        })
+      );
       return shuffleArray(citiesWithImg);
     } catch (e) {
       console.error(e);
     }
   };
 
-  const apiKeyPIXABAY = import.meta.env.VITE_PIXABAY_API_KEY 
+  const apiKeyPIXABAY = import.meta.env.VITE_PIXABAY_API_KEY;
 
   const getCityPics = async (cityName) => {
     try {
-      const response = await fetch(`https://pixabay.com/api/?key=${apiKeyPIXABAY}&category=places&q=${cityName}&image_type=photo&safesearch=true`
+      const response = await fetch(
+        `https://pixabay.com/api/?key=${apiKeyPIXABAY}&category=places&q=${cityName}&image_type=photo&safesearch=true`
       );
       const data = await response.json();
-      console.log(data)
-      console.log(data?.hits[0]?.webformatURL )
+      console.log(data);
+      console.log(data?.hits[0]?.webformatURL);
       return data?.hits[0]?.webformatURL ?? null;
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   useEffect(() => {
-      console.log(continent);
-    console.log(cities)
+    console.log(continent);
+    console.log(cities);
   }, [continent, cities]);
 
   return (
@@ -108,6 +120,8 @@ export default function Population() {
           name="northAmerica"
           className="continent-btn"
           onClick={handleContinent}
+          disabled={game}
+          style={game && ("northAmerica" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           North America
         </button>
@@ -115,6 +129,8 @@ export default function Population() {
           name="southAmerica"
           className="continent-btn"
           onClick={handleContinent}
+          disabled={game}
+          style={game && ("southAmerica" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           South America
         </button>
@@ -122,6 +138,8 @@ export default function Population() {
           name="europe"
           className="continent-btn"
           onClick={handleContinent}
+          disabled={game}
+          style={game && ("europe" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           Europe
         </button>
@@ -129,16 +147,26 @@ export default function Population() {
           name="africa"
           className="continent-btn"
           onClick={handleContinent}
+          disabled={game}
+          style={game && ("africa" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           Africa
         </button>
-        <button name="asia" className="continent-btn" onClick={handleContinent}>
+        <button 
+        name="asia" 
+        className="continent-btn" 
+        onClick={handleContinent}
+        disabled={game}
+        style={game && ("asia" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
+        >
           Asia
         </button>
         <button
           name="australia"
           className="continent-btn"
           onClick={handleContinent}
+          disabled={game}
+          style={game && ("australia" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           Australia
         </button>
@@ -152,21 +180,32 @@ export default function Population() {
         </section>
       ) : (
         <section id="img-boxes">
-        {cities.map((city, i) => {
-          if (i >= 5) {return; 
-          } else {
-            return (
-                <div key={city.cityName} className="img-name-box"><span className="number">{i +1}</span>
-                  <img src={city.imageUrl || logo} alt="" className="img-box" style={city.imageUrl ? {} : {objectFit: "contain"}}/>
-                  { true ? <p className="city-name">{city.cityName}</p> :
-                  <p className="city-name">{city.populationSize.toLocaleString()}</p>}
+          {cities.map((city, i) => {
+            if (i >= 5) {
+              return;
+            } else {
+              return (
+                <div key={city.cityName} className="img-name-box">
+                  <span className="number">{i + 1}</span>
+                  <img
+                    src={city.imageUrl || logo}
+                    alt=""
+                    className="img-box"
+                    style={city.imageUrl ? {} : { objectFit: "contain" }}
+                  />
+                  {true ? (
+                    <p className="city-name">{city.cityName}</p>
+                  ) : (
+                    <p className="city-name">
+                      {city.populationSize.toLocaleString()}
+                    </p>
+                  )}
                 </div>
-            )
-          }
-        })}
-         </section>
+              );
+            }
+          })}
+        </section>
       )}
     </main>
   );
 }
-
