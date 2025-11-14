@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import logo from './assets/geo-trivia-logo.png'
 
 export default function Population() {
   const [continent, setContinent] = useState(null);
@@ -37,9 +38,9 @@ export default function Population() {
     },
     australia: {
       north: -10,
-      south: -45,
-      east: 155,
-      west: -110,
+      south: -44,
+      east: 154,
+      west: 112,
     },
   };
 
@@ -57,7 +58,7 @@ export default function Population() {
         const j = Math.floor(Math.random() * (i + 1));
         [citiesArray[i], citiesArray[j]] = [citiesArray[j], citiesArray[i]]
     }
-    return setCities(citiesArray), console.log(cities)
+    return setCities(citiesArray)
   }
 
   const getCityNames = async ({north, south, east, west}) => {
@@ -66,7 +67,7 @@ export default function Population() {
         `http://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=de&username=${apiKeyGEONAMES}`
       );
       const data = await response.json();
-      const citiesArray = data.geonames.map((city) => city.toponymName)
+      const citiesArray = data.geonames.map((city, i) => ({cityName: city.toponymName, populationSize: city.population}))
       console.log(citiesArray)
       return shuffleArray(citiesArray);
     } catch (e) {
@@ -130,28 +131,21 @@ export default function Population() {
         </section>
       ) : (
         <section id="img-boxes">
-          <div className="img-name-box">1
-            <img src="" alt="" className="img-box" />
-            <p className="city-name">{cities[0]}</p>
-          </div>
-          <div className="img-name-box">2
-            <img src="" alt="" className="img-box" />
-            <p className="city-name">{cities[1]}</p>
-          </div>
-          <div className="img-name-box">3
-            <img src="" alt="" className="img-box" />
-            <p className="city-name">{cities[2]}</p>
-          </div>
-          <div className="img-name-box">4
-            <img src="" alt="" className="img-box" />
-            <p className="city-name">{cities[3]}</p>
-          </div>
-          <div className="img-name-box">5
-            <img src="" alt="" className="img-box" />
-            <p className="city-name">{cities[4]}</p>
-          </div>
-        </section>
+        {cities.map((city, i) => {
+          if (i >= 5) {return; 
+          } else {
+            return (
+                <div key={city.cityName} className="img-name-box"><span className="number">{i +1}</span>
+                  <img src={logo} alt="" className="img-box" />
+                  {false ? <p className="city-name">{city.cityName}</p> :
+                  <p className="city-name">{city.populationSize.toLocaleString()}</p>}
+                </div>
+            )
+          }
+        })}
+         </section>
       )}
     </main>
   );
 }
+
