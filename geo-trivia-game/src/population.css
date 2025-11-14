@@ -6,7 +6,7 @@ main {
     display: flex;
     justify-content: space-evenly;
     /* outline: 1px red solid; */
-    margin: 20px 0 0 0;
+    margin: 15px 0 0 0;
     flex-wrap: wrap;
 }
 .continent-btn {
@@ -15,6 +15,7 @@ main {
     color: #f7eed1;
     background-color: #7aa363;
     padding: 5px 10px 5px 10px;
+    margin: 0 8px 10px 0;
     border-radius: 10px;
     font-weight: 800;
     box-shadow: 5px 5px 3px #3e5435;
@@ -31,7 +32,7 @@ main {
     /* outline: 1px red solid; */
     font-family: Courier, monospace;
     justify-content: space-between;
-    margin: 40px 2px 0px 2px;
+    margin: 20px 2px 0px 2px;
     font-size: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +45,7 @@ main {
     border: 10px #417e82 solid;
     border-bottom: 26px solid #417e82;
     height: 200px;
-    width: 150px;
+    width: 140px;
     object-fit: cover;
     margin: 0 0 -30px 0;
     border-radius: 5px;
@@ -59,10 +60,20 @@ main {
     margin-left: 14px;
 }
 .number {
-    border:#3e5435 2px solid;
+    /* border:#3e5435 2px solid; */
     background-color: #7aa363;
     color: #f7eed1;
-    border-radius: 2px;
+    border-radius: 3px;
     position: relative;
-    top: -215px
+    top: -198px;
+    left: 6px;
+}
+#pop-img-section {
+    /* outline: 1px red solid; */
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 50px 0 50px;
+}
+.pop-img {
+    height: 55px;
 }

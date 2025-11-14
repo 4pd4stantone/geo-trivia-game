@@ -1,10 +1,30 @@
 import { useState, useEffect } from "react";
 import logo from "./assets/geo-trivia-logo.png";
+import largePop from "./assets/largePop.png"
+import mediumPop from "./assets/mediumPop.png"
+import smallPop from "./assets/smallPop.png"
 
 export default function Population() {
   const [continent, setContinent] = useState(null);
   const [cities, setCities] = useState([]);
   const [game, setGame] = useState(false);
+
+  // function handleDragEnd(event: DragEndEvent) {
+  //   const { active, over } = event;
+
+  //   if (!over) return;
+
+  //   const taskId = active.ed 
+  //   const newStatus = over.id 
+
+  //   setTasks(() => tasks.map(task => task.ed === taskId ? {
+  //           ...task,
+  //           status: newStatus,
+  //         }
+  //         : task
+  //       ),
+  //     );
+  // }
 
   const coordinates = {
     europe: {
@@ -101,8 +121,10 @@ export default function Population() {
       );
       const data = await response.json();
       console.log(data);
-      console.log(data?.hits[0]?.webformatURL);
-      return data?.hits[0]?.webformatURL ?? null;
+      const index = Math.floor(Math.random() * 5)
+      console.log(index)
+      console.log(data?.hits[index]?.webformatURL);
+      return data?.hits[index]?.webformatURL ?? null;
     } catch (e) {
       console.error(e);
     }
@@ -206,6 +228,17 @@ export default function Population() {
           })}
         </section>
       )}
+      <section id="pop-img-section">
+        <div>
+          <img src={largePop} alt="Large Population" className="pop-img"/>
+        </div>
+        <div>
+          <img src={mediumPop} alt="Medium Population" className="pop-img"/>
+        </div>
+        <div>
+          <img src={smallPop} alt="Small Population" className="pop-img"/>
+        </div>
+      </section>
     </main>
   );
 }
