@@ -2,18 +2,16 @@ import { useState, useEffect } from "react";
 import CityCards from "./CityCards.jsx";
 import coordinates from "./coordinates.js";
 import columns from "./columns.js"
-import logo from "./assets/geo-trivia-logo.png";
+import arrow from "./assets/arrow.png";
 import largestPop from "./assets/largestPop.png"
-import largePop from "./assets/largePop.png"
-import mediumLargePop from "./assets/mediumLargePop.png"
-import mediumPop from "./assets/mediumPop.png"
 import smallPop from "./assets/smallPop.png"
-import smallestPop from "./assets/smallestPop.png"
 
 export default function Population() {
   const [continent, setContinent] = useState(null);
   const [cities, setCities] = useState([]);
   const [game, setGame] = useState(false);
+  const [status, setStatus] = useState(null)
+ 
 
   // function handleDragEnd(event: DragEndEvent) {
   //   const { active, over } = event;
@@ -33,7 +31,8 @@ export default function Population() {
   // }
 
   function assignStatus(citiesWithImg) {
-    const citiesWithStatus = citiesWithImg.map((card, i) => ({...card, status: i + 1})  )
+    const firstFive = citiesWithImg.slice(0,5)
+    const citiesWithStatus = firstFive.map((card, i) => ({...card, status: i + 1})  )
     console.log(citiesWithStatus)
     return setCities(citiesWithStatus)
 }
@@ -175,27 +174,30 @@ const getCityPics = async (cityName) => {
         </section>
       ) : (
         <section id="img-boxes">
-         <CityCards cities={cities} />
+          {columns.map((column) => {
+            const cityCardPerColumn = cities.find(
+              (cityCard) => cityCard.status === column.id
+            )
+            return (
+              <div key={column.id} className="column">
+                <span className="number">{column.id}</span>
+                 {cityCardPerColumn && <CityCards city={cityCardPerColumn} />}
+              </div>
+            )
+          })}
         </section>
       )}
-    
       {game ?
       ( <section id="pop-img-section">
-        <div>
-          <img src={largestPop} alt="Large Population" className="pop-img"/>
-        </div>
-        <div>
-          <img src={largePop} alt="Medium Population" className="pop-img"/>
-        </div>
-        <div>
-          <img src={mediumLargePop} alt="Small Population" className="pop-img"/>
-        </div>
-        <div>
-          <img src={mediumPop} alt="Small Population" className="pop-img"/>
-        </div>
-        <div>
-          <img src={smallestPop} alt="Small Population" className="pop-img"/>
-        </div>
+          <div id="left-pop-img">
+            <img src={largestPop} alt="Large Population" />
+          </div>
+          <div id="arrow-img">
+            <img src={arrow} alt="arrow" />
+          </div>
+          <div id="right-pop-img">
+            <img src={smallPop} alt="Small Population"/>
+          </div>
       </section>)
       : 
       ("")

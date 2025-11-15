@@ -31,7 +31,7 @@ main {
 #img-boxes {
     /* outline: 1px red solid; */
     justify-content: space-between;
-    margin: 20px 2px 0px 2px;
+    margin: -7px 2px 0px 2px;
     font-size: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -46,7 +46,7 @@ main {
     height: 200px;
     width: 140px;
     object-fit: cover;
-    margin: 0 0 -30px 0;
+    margin: 0px 0 -30px 0;
     border-radius: 5px;
     box-shadow: 2px 2px 2px #306067;
     background-color: #ffffff;
@@ -67,15 +67,42 @@ main {
     color: #f7eed1;
     border-radius: 3px;
     position: relative;
-    top: -200px;
-    left: 6px;
+    top: 6px;
+    left: -6px;
 }
+
 #pop-img-section {
-    /* outline: 1px red solid; */
     display: flex;
-    justify-content: space-between;
-    margin: 0px 50px 0 50px;
+    width: 100%;
+    margin-top: 10px;
 }
-.pop-img {
-    height: 55px;
+
+#pop-img-section > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#left-pop-img img {
+    max-width: 20%;
+    height: auto;
+    display: flex;
+    object-fit: contain;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: 40px;
+}
+#right-pop-img img {
+    max-width: 20%;
+    height: auto;
+    display: flex;
+    object-fit: contain;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 40px;
+}
+#arrow-img img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+
 }
