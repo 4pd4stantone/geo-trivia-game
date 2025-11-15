@@ -43,6 +43,12 @@ export default function Population() {
   }
   console.log(game);
 
+  function assignStatus(citiesWithImg) {
+    const citiesWithStatus = citiesWithImg.map((card, i) => ({...card, status: i + 1})  )
+    console.log(citiesWithStatus)
+    return setCities(citiesWithStatus)
+  }
+
   function shuffleArray(citiesWithImg) {
     for (let i = citiesWithImg.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -51,7 +57,7 @@ export default function Population() {
         citiesWithImg[i],
       ];
     }
-    return setCities(citiesWithImg);
+    return assignStatus(citiesWithImg);
   }
 
   const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
