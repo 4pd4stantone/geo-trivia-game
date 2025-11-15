@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import coordinates from "./coordinates";
+import CityCards from "./CityCards.jsx";
+import coordinates from "./coordinates.js";
+import columns from "./columns.js"
 import logo from "./assets/geo-trivia-logo.png";
 import largestPop from "./assets/largestPop.png"
 import largePop from "./assets/largePop.png"
@@ -30,26 +32,13 @@ export default function Population() {
   //     );
   // }
 
-  
-
-  function handleContinent(e) {
-    console.log(continent);
-    const selected = e.target.name;
-    setContinent(selected);
-    const coords = coordinates[selected];
-    getCityNames(coords);
-    console.log(game);
-    setGame(true);
-  }
-  console.log(game);
-
   function assignStatus(citiesWithImg) {
     const citiesWithStatus = citiesWithImg.map((card, i) => ({...card, status: i + 1})  )
     console.log(citiesWithStatus)
     return setCities(citiesWithStatus)
-  }
+}
 
-  function shuffleArray(citiesWithImg) {
+function shuffleArray(citiesWithImg) {
     for (let i = citiesWithImg.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [citiesWithImg[i], citiesWithImg[j]] = [
@@ -58,11 +47,11 @@ export default function Population() {
       ];
     }
     return assignStatus(citiesWithImg);
-  }
+}
 
-  const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
+const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
 
-  const getCityNames = async ({ north, south, east, west }) => {
+const getCityNames = async ({ north, south, east, west }) => {
     try {
       const response = await fetch(
         `http://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=de&username=${apiKeyGEONAMES}`
@@ -83,11 +72,11 @@ export default function Population() {
     } catch (e) {
       console.error(e);
     }
-  };
+};
 
-  const apiKeyPIXABAY = import.meta.env.VITE_PIXABAY_API_KEY;
+const apiKeyPIXABAY = import.meta.env.VITE_PIXABAY_API_KEY;
 
-  const getCityPics = async (cityName) => {
+const getCityPics = async (cityName) => {
     try {
       const response = await fetch(
         `https://pixabay.com/api/?key=${apiKeyPIXABAY}&category=places&q=${cityName}&image_type=photo&safesearch=true`
@@ -101,7 +90,18 @@ export default function Population() {
     } catch (e) {
       console.error(e);
     }
-  };
+};
+
+  function handleContinent(e) {
+    console.log(continent);
+    const selected = e.target.name;
+    setContinent(selected);
+    const coords = coordinates[selected];
+    getCityNames(coords);
+    console.log(game);
+    setGame(true);
+  }
+  console.log(game);
 
   useEffect(() => {
     console.log(continent);
@@ -175,30 +175,7 @@ export default function Population() {
         </section>
       ) : (
         <section id="img-boxes">
-          {cities.map((city, i) => {
-            if (i >= 5) {
-              return;
-            } else {
-              return (
-                <div key={city.cityName} className="img-name-box">
-                  <span className="number">{i + 1}</span>
-                  <img
-                    src={city.imageUrl || logo}
-                    alt=""
-                    className="img-box"
-                    style={city.imageUrl ? {} : { objectFit: "contain" }}
-                  />
-                  {true ? (
-                    <p className="city-name">{city.cityName}</p>
-                  ) : (
-                    <p className="city-name">
-                      {city.populationSize.toLocaleString()}
-                    </p>
-                  )}
-                </div>
-              );
-            }
-          })}
+         <CityCards cities={cities} />
         </section>
       )}
     
