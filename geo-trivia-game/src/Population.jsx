@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import coordinates from "./coordinates";
 import logo from "./assets/geo-trivia-logo.png";
+import largestPop from "./assets/largestPop.png"
 import largePop from "./assets/largePop.png"
+import mediumLargePop from "./assets/mediumLargePop.png"
 import mediumPop from "./assets/mediumPop.png"
 import smallPop from "./assets/smallPop.png"
+import smallestPop from "./assets/smallestPop.png"
 
 export default function Population() {
   const [continent, setContinent] = useState(null);
@@ -26,44 +30,7 @@ export default function Population() {
   //     );
   // }
 
-  const coordinates = {
-    europe: {
-      north: 71,
-      south: 35,
-      east: 40,
-      west: -10,
-    },
-    northAmerica: {
-      north: 83,
-      south: 7,
-      east: -52,
-      west: -168,
-    },
-    asia: {
-      north: 81,
-      south: -11,
-      east: 180,
-      west: 25,
-    },
-    southAmerica: {
-      north: 13,
-      south: -56,
-      east: -35,
-      west: -81,
-    },
-    africa: {
-      north: 37,
-      south: -35,
-      east: 52,
-      west: -17,
-    },
-    australia: {
-      north: -10,
-      south: -44,
-      east: 154,
-      west: 112,
-    },
-  };
+  
 
   function handleContinent(e) {
     console.log(continent);
@@ -232,13 +199,19 @@ export default function Population() {
       {game ?
       ( <section id="pop-img-section">
         <div>
-          <img src={largePop} alt="Large Population" className="pop-img"/>
+          <img src={largestPop} alt="Large Population" className="pop-img"/>
         </div>
         <div>
-          <img src={mediumPop} alt="Medium Population" className="pop-img"/>
+          <img src={largePop} alt="Medium Population" className="pop-img"/>
         </div>
         <div>
-          <img src={smallPop} alt="Small Population" className="pop-img"/>
+          <img src={mediumLargePop} alt="Small Population" className="pop-img"/>
+        </div>
+        <div>
+          <img src={mediumPop} alt="Small Population" className="pop-img"/>
+        </div>
+        <div>
+          <img src={smallestPop} alt="Small Population" className="pop-img"/>
         </div>
       </section>)
       : 

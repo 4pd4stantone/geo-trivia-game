@@ -30,7 +30,6 @@ main {
 }
 #img-boxes {
     /* outline: 1px red solid; */
-    font-family: Courier, monospace;
     justify-content: space-between;
     margin: 20px 2px 0px 2px;
     font-size: 20px;
@@ -38,7 +37,7 @@ main {
     flex-wrap: wrap;
 }
 .img-name-box {
-    margin: 0 0 20px 0;
+    margin: 0px 0 20px 0;
     
 }
 .img-box {
@@ -54,18 +53,21 @@ main {
 }
 .city-name {
     text-align: center;
-    margin: 0;
+    margin: 1px 0 0 0;
     color:#f7eed1;
     /* outline: 1px solid red; */
     margin-left: 14px;
+    font-family: Courier, monospace;
+    font-size: 18px;
 }
 .number {
     /* border:#3e5435 2px solid; */
     background-color: #7aa363;
+    padding: 0 2px 0 2px;
     color: #f7eed1;
     border-radius: 3px;
     position: relative;
-    top: -198px;
+    top: -200px;
     left: 6px;
 }
 #pop-img-section {
