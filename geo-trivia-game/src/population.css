@@ -120,3 +120,17 @@ main {
     box-shadow: 2px 2px 2px #306067;
     background-color: #306067;
 }
+.city-pop {
+    outline: 5px #306067 solid;
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
+    top: -110px;
+    left: 11px;
+    color: #306067;
+    background-color: white;
+    font-size: 30px;
+    font-weight: 900;
+    transform: rotate(-20deg);
+    text-shadow: 1px 1px 1px #0d282c;
+}

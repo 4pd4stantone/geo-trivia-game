@@ -13,7 +13,7 @@ export default function Population() {
   const [continent, setContinent] = useState(null);
   const [cities, setCities] = useState([]);
   const [game, setGame] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [won, setWon] = useState(false)
 
  
 
@@ -40,7 +40,9 @@ export default function Population() {
   function allTrue(citiesUpdated) {
     const cityCorrectOrder = citiesUpdated.every(city => city.correctOrder === true)
     console.log('It is ' + cityCorrectOrder + " that you won")
-    
+    if (cityCorrectOrder) {
+      return setWon(true)
+    }
   }
 
   function handleDragEnd(event) {
@@ -222,7 +224,7 @@ const getCityPics = async (cityName) => {
 
             return (
               <Columns column={column} key={column.id} >
-                {cityCardPerColumn && <CityCards city={cityCardPerColumn} />}
+                {cityCardPerColumn && <CityCards city={cityCardPerColumn} won={won} />}
               </Columns> 
             )
           })}

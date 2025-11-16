@@ -1,7 +1,7 @@
 import { useDraggable } from "@dnd-kit/core"
 import logo from "./assets/geo-trivia-logo.png"
 
-export default function CityCards({city}) {
+export default function CityCards({city, won}) {
 
     const {attributes, listeners, setNodeRef, transform } = useDraggable({
         id: city.cityName,
@@ -20,13 +20,12 @@ export default function CityCards({city}) {
             className="img-box"
             style={city.imageUrl ? {} : { objectFit: "contain" }}
             />
-            {true ? (
             <p className="city-name">{city.cityName}</p>
-            ) : (
-            <p className="city-name">
+           {won ?
+            <p className="city-pop">
                 {city.populationSize.toLocaleString()}
-            </p>
-            )}
+            </p> : ""}
+    
         </div>
     </>
     )
