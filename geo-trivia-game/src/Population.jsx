@@ -34,10 +34,12 @@ export default function Population() {
      }
     })
     setCities(citiesUpdated);
-
+    allTrue(citiesUpdated)
 }
-  
-  function score() {
+  // taking the cities correctOrder through a test to see if its value is true, if all the values are true it will return true as a whole
+  function allTrue(citiesUpdated) {
+    const cityCorrectOrder = citiesUpdated.every(city => city.correctOrder === true)
+    console.log('It is ' + cityCorrectOrder + " that you won")
     
   }
 
