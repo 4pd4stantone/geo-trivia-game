@@ -13,8 +13,33 @@ export default function Population() {
   const [continent, setContinent] = useState(null);
   const [cities, setCities] = useState([]);
   const [game, setGame] = useState(false);
-  const [status, setStatus] = useState(null)
+  const [status, setStatus] = useState(null);
+
  
+
+  // function to check correct order of population, from largest to smallest every time the drag and drop function is done.
+  function checkPopulation(cities) {
+    
+    const sortedPop = [...cities].toSorted((a, b) => b.populationSize - a.populationSize);
+    console.log(sortedPop)
+
+    const citiesUpdated = cities.map(city => {
+     const correctCityIndex = sortedPop[city.status -1]
+
+     const isCorrectOrder = city.populationSize === correctCityIndex.populationSize
+
+     return {
+      ...city,
+      correctOrder: isCorrectOrder
+     }
+    })
+    setCities(citiesUpdated);
+
+}
+  
+  function score() {
+    
+  }
 
   function handleDragEnd(event) {
     const { active, over } = event;
@@ -28,7 +53,7 @@ export default function Population() {
       const draggedCard = prev.find(city => city.cityName === activeId);
       const cardInTarget = prev.find(city => city.status === targetColumn);
       
-      return prev.map(city => {
+      const updatedCities = prev.map(city => {
         if(city.cityName === activeId) {
           return {...city, status: targetColumn}
         }
@@ -37,13 +62,16 @@ export default function Population() {
         }
         return city
       })
+    checkPopulation(updatedCities)
+    return updatedCities
     })
+ 
   }
 
 
   function assignStatus(citiesWithImg) {
     const firstFive = citiesWithImg.slice(0,5)
-    const citiesWithStatus = firstFive.map((card, i) => ({...card, status: i + 1})  )
+    const citiesWithStatus = firstFive.map((card, i) => ({...card, status: i + 1, correctOrder: null})  )
     console.log(citiesWithStatus)
     return setCities(citiesWithStatus)
 }
