@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { DndContext } from "@dnd-kit/core";
+import { useDroppable } from "@dnd-kit/core"
 import CityCards from "./CityCards.jsx";
 import coordinates from "./coordinates.js";
-import columns from "./columns.js"
 import arrow from "./assets/arrow.png";
-import largestPop from "./assets/largestPop.png"
+import xlargePop from "./assets/xlargePop.png"
 import smallPop from "./assets/smallPop.png"
+import Columns from "./Columns.jsx";
+import columnsArray from "./columnsArray.js";
 
 export default function Population() {
   const [continent, setContinent] = useState(null);
@@ -13,22 +16,30 @@ export default function Population() {
   const [status, setStatus] = useState(null)
  
 
-  // function handleDragEnd(event: DragEndEvent) {
-  //   const { active, over } = event;
+  function handleDragEnd(event) {
+    const { active, over } = event;
 
-  //   if (!over) return;
+    if (!over) return;
 
-  //   const taskId = active.ed 
-  //   const newStatus = over.id 
+    const activeId = active.id 
+    const targetColumn = over.id 
 
-  //   setTasks(() => tasks.map(task => task.ed === taskId ? {
-  //           ...task,
-  //           status: newStatus,
-  //         }
-  //         : task
-  //       ),
-  //     );
-  // }
+    setCities(prev => {
+      const draggedCard = prev.find(city => city.cityName === activeId);
+      const cardInTarget = prev.find(city => city.status === targetColumn);
+      
+      return prev.map(city => {
+        if(city.cityName === activeId) {
+          return {...city, status: targetColumn}
+        }
+        if (city.cityName === cardInTarget.cityName) {
+          return {...city, status: draggedCard.status}
+        }
+        return city
+      })
+    })
+  }
+
 
   function assignStatus(citiesWithImg) {
     const firstFive = citiesWithImg.slice(0,5)
@@ -174,23 +185,24 @@ const getCityPics = async (cityName) => {
         </section>
       ) : (
         <section id="img-boxes">
-          {columns.map((column) => {
+          <DndContext onDragEnd={handleDragEnd}>
+          {columnsArray.map((column) => {
             const cityCardPerColumn = cities.find(
-              (cityCard) => cityCard.status === column.id
-            )
+              (cityCard) => cityCard.status === column.id)
+
             return (
-              <div key={column.id} className="column">
-                <span className="number">{column.id}</span>
-                 {cityCardPerColumn && <CityCards city={cityCardPerColumn} />}
-              </div>
+              <Columns column={column} key={column.id} >
+                {cityCardPerColumn && <CityCards city={cityCardPerColumn} />}
+              </Columns> 
             )
           })}
+          </DndContext>
         </section>
       )}
       {game ?
       ( <section id="pop-img-section">
           <div id="left-pop-img">
-            <img src={largestPop} alt="Large Population" />
+            <img src={xlargePop} alt="Large Population" />
           </div>
           <div id="arrow-img">
             <img src={arrow} alt="arrow" />

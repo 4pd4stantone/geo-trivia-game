@@ -31,7 +31,7 @@ main {
 #img-boxes {
     /* outline: 1px red solid; */
     justify-content: space-between;
-    margin: -7px 2px 0px 2px;
+    margin: -7px 20px 0px 20px;
     font-size: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -50,15 +50,19 @@ main {
     border-radius: 5px;
     box-shadow: 2px 2px 2px #306067;
     background-color: #ffffff;
+    position: relative;
+    top: -18px;
+    left: 1px
 }
 .city-name {
     text-align: center;
     margin: 1px 0 0 0;
     color:#f7eed1;
     /* outline: 1px solid red; */
-    margin-left: 14px;
+    margin: -15px -21px 0px 2px;
     font-family: Courier, monospace;
     font-size: 18px;
+    position: relative;
 }
 .number {
     /* border:#3e5435 2px solid; */
@@ -67,8 +71,8 @@ main {
     color: #f7eed1;
     border-radius: 3px;
     position: relative;
-    top: 6px;
-    left: -6px;
+    top: -14px;
+    left: -14px;
 }
 
 #pop-img-section {
@@ -105,4 +109,14 @@ main {
     height: auto;
     object-fit: cover;
 
+}
+.column {
+    border: 10px #306067 solid;
+    border-bottom: 26px solid #306067;
+    height: 200px;
+    width: 140px;
+    margin: 10px 0 20px 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #306067;
+    background-color: #306067;
 }
