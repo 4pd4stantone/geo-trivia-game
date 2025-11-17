@@ -14,12 +14,12 @@ header {
   width: 80px;
 }
 
-#timer {
-  height: 50px;
+#moves-left {
+  height: 70px;
   margin: 10px 0 0 10px;
 }
 #score {
-  height: 50px;
+  height: 70px;
   margin: 10px 10px 0 0;
 }
 #name-title-subtitle {
@@ -33,7 +33,6 @@ header {
   font-weight: 900;
   color: #1d3843;
   margin: 0;
-  
 }
 
 #subtitle {

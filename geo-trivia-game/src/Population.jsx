@@ -14,6 +14,7 @@ export default function Population() {
   const [cities, setCities] = useState([]);
   const [game, setGame] = useState(false);
   const [won, setWon] = useState(false)
+  const [conquered, setConquered] = useState([])
 
  
 
@@ -34,13 +35,16 @@ export default function Population() {
      }
     })
     setCities(citiesUpdated);
-    allTrue(citiesUpdated)
+    allTrue(citiesUpdated);
 }
   // taking the cities correctOrder through a test to see if its value is true, if all the values are true it will return true as a whole
   function allTrue(citiesUpdated) {
     const cityCorrectOrder = citiesUpdated.every(city => city.correctOrder === true)
     console.log('It is ' + cityCorrectOrder + " that you won")
     if (cityCorrectOrder) {
+      setContinent(continent)
+      if (conquered.includes(continent)) {
+        return;} else {setConquered([...conquered, continent])}
       return setWon(true)
     }
   }
@@ -96,7 +100,7 @@ const apiKeyGEONAMES = import.meta.env.VITE_GEONAMES_API_KEY;
 const getCityNames = async ({ north, south, east, west }) => {
     try {
       const response = await fetch(
-        `http://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=de&username=${apiKeyGEONAMES}`
+        `https://secure.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=de&username=${apiKeyGEONAMES}`
       );
       const data = await response.json();
       const citiesArray = data.geonames.map((city, i) => ({
@@ -148,62 +152,63 @@ const getCityPics = async (cityName) => {
   useEffect(() => {
     console.log(continent);
     console.log(cities);
-  }, [continent, cities]);
+    console.log(conquered)
+  }, [continent, cities, conquered]);
 
   return (
     <main>
       <section id="continent-btns">
         <button
-          name="northAmerica"
+          name="North America"
           className="continent-btn"
           onClick={handleContinent}
           disabled={game}
-          style={game && ("northAmerica" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
+          style={game && ("North America" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           North America
         </button>
         <button
-          name="southAmerica"
+          name="South America"
           className="continent-btn"
           onClick={handleContinent}
           disabled={game}
-          style={game && ("southAmerica" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
+          style={game && ("South America" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           South America
         </button>
         <button
-          name="europe"
+          name="Europe"
           className="continent-btn"
           onClick={handleContinent}
           disabled={game}
-          style={game && ("europe" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
+          style={game && ("Europe" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           Europe
         </button>
         <button
-          name="africa"
+          name="Africa"
           className="continent-btn"
           onClick={handleContinent}
           disabled={game}
-          style={game && ("africa" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
+          style={game && ("Africa" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           Africa
         </button>
         <button 
-        name="asia" 
+        name="Asia" 
         className="continent-btn" 
         onClick={handleContinent}
         disabled={game}
-        style={game && ("asia" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
+        style={game && ("Asia" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           Asia
         </button>
         <button
-          name="australia"
+          name="Australia"
           className="continent-btn"
           onClick={handleContinent}
           disabled={game}
-          style={game && ("australia" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
+          style={game && ("Australia" === continent) ? {outline: "8px #417e82 solid", border: "5px"} : {}}
         >
           Australia
         </button>
@@ -231,7 +236,7 @@ const getCityPics = async (cityName) => {
           </DndContext>
         </section>
       )}
-      {game ?
+      {game && !won ?
       ( <section id="pop-img-section">
           <div id="left-pop-img">
             <img src={xlargePop} alt="Large Population" />
@@ -246,6 +251,12 @@ const getCityPics = async (cityName) => {
       : 
       ("")
       }
+      {won ?
+      <section id="won">
+        <h1>Congratulations you have conquered {continent}!</h1>
+      </section> 
+      :
+      ("")}
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import logo from './assets/geo-trivia-logo.png'
-import timer from './assets/timer.png'
-import score from './assets/score.png'
+import movesLeft from './assets/movesLeft.png'
+import movesLeft2 from './assets/movesLeft2.png'
+import medals from './assets/medals.png'
 
 export default function Nav() {
 
@@ -8,7 +9,7 @@ export default function Nav() {
         <>
             <nav>
                 <div>
-                    <img src={timer} alt="Timer" id='timer'/>
+                    <img src={movesLeft2} alt="Moves Left" id='moves-left'/>
                 </div>
                 <header>
                     <div>
@@ -20,7 +21,7 @@ export default function Nav() {
                     </div>
                 </header>
                 <div>
-                    <img src={score} alt="Score" id='score'/>
+                    <img src={medals} alt="Score" id='score'/>
                 </div>
             </nav>
         </>

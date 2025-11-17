@@ -132,5 +132,15 @@ main {
     font-size: 30px;
     font-weight: 900;
     transform: rotate(-20deg);
-    text-shadow: 1px 1px 1px #0d282c;
+    text-shadow: 1px 1px 1px #1d3843;
 }
+#won {
+    font-size: 20px;
+    font-family: Courier, monospace;
+    font-weight: 900;
+    color: #1d3843;
+    text-align: center;
+    text-shadow: 1px 1px 1px #7aa363;
+    margin-top: -25px;
+}
+
