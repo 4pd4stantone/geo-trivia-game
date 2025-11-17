@@ -1,16 +1,78 @@
-# React + Vite
+# GEO‑TRIVIA Games
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Live Site
+- Netlify: https://geo-trivia-game.netlify.app/
+Map. Guess. Conquer. Arrange five cities by population (left most populated to right least populated) to conquer each continent and earn medals.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Screenshot](/mnt/data/Screenshot 2025-11-16 at 10.16.33 PM.png)
+![Screenshot](/mnt/data/Screenshot 2025-11-16 at 10.17.02 PM.png)
+![Screenshot](/mnt/data/Screenshot 2025-11-16 at 10.19.58 PM.png)
 
-## React Compiler
+## Features
+- 6 continents: North America, South America, Europe, Africa, Asia, Australia
+- Drag‑and‑drop city cards
+- Victory banner and medals
+- Responsive layout, custom badges, and icons
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+- React (often scaffolded with Vite)
+- @dnd-kit for drag & drop
+- JavaScript/TypeScript
+- HTML & CSS
 
-## Expanding the ESLint configuration
+## Project Structure
+geo-trivia-game
+geo-trivia-game/public
+geo-trivia-game/public/vite.svg
+geo-trivia-game/src
+geo-trivia-game/src/App.jsx
+geo-trivia-game/src/CityCards.jsx
+geo-trivia-game/src/Columns.jsx
+geo-trivia-game/src/Nav.jsx
+geo-trivia-game/src/Population.jsx
+geo-trivia-game/src/assets
+geo-trivia-game/src/columnsArray.js
+geo-trivia-game/src/coordinates.js
+geo-trivia-game/src/index.css
+geo-trivia-game/src/main.jsx
+geo-trivia-game/src/population.css
+geo-trivia-game/vite.config.js
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Getting Started
+1. Install dependencies
+   bash
+   npm install
+ 
+2. Run locally
+   bash
+   npm run dev
+
+3. Open
+
+   http://localhost:5173
+
+
+## Environment
+Use HTTPS for any external APIs to avoid mixed‑content errors in production. For GeoNames:
+
+VITE_GEONAMES_USER=your_username
+
+fetch(`https://api.geonames.org/citiesJSON?north=${north}&south=${south}&east=${east}&west=${west}&lang=en&username=${import.meta.env.VITE_GEONAMES_USER}`) 
+
+
+## Gameplay
+1. Select a continent.
+2. Arrange the five cities by population from left (most) to right (least).
+3. When correct, the banner confirms conquest and a medal is awarded.
+
+## Author
+
+Victor Stanton
+Software Engineer
+Email: Victor.Stanton@gmail.com
+
+## License
+
+MIT License © 2025 Victor Stanton
