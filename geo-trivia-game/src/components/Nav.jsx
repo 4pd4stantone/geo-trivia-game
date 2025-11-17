@@ -1,7 +1,6 @@
-import logo from './assets/geo-trivia-logo.png'
-import movesLeft from './assets/movesLeft.png'
-import movesLeft2 from './assets/movesLeft2.png'
-import medals from './assets/medals.png'
+import logo from '../assets/geo-trivia-logo.png'
+import movesLeft2 from '../assets/movesLeft2.png'
+import medals from '../assets/medals.png'
 
 export default function Nav() {
 

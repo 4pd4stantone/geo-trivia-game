@@ -1,5 +1,5 @@
 import { useDraggable } from "@dnd-kit/core"
-import logo from "./assets/geo-trivia-logo.png"
+import logo from "../assets/geo-trivia-logo.png"
 
 export default function CityCards({city, won}) {
 

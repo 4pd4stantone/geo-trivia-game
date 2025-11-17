@@ -1,5 +1,5 @@
-import Nav from './Nav'
-import Population from './Population'
+import Nav from './components/Nav'
+import Population from './pages/Population'
 
 
 export default function App() {

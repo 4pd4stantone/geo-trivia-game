@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { DndContext } from "@dnd-kit/core";
-import { useDroppable } from "@dnd-kit/core"
-import CityCards from "./CityCards.jsx";
-import coordinates from "./coordinates.js";
-import arrow from "./assets/arrow.png";
-import xlargePop from "./assets/xlargePop.png"
-import smallPop from "./assets/smallPop.png"
-import Columns from "./Columns.jsx";
-import columnsArray from "./columnsArray.js";
+import CityCards from "../components/CityCards.jsx";
+import coordinates from "../data/coordinates.js";
+import arrow from "../assets/arrow.png";
+import xlargePop from "../assets/xlargePop.png"
+import smallPop from "../assets/smallPop.png"
+import Columns from "../components/Columns.jsx";
+import columnsArray from "../data/columnsArray.js";
 
 export default function Population() {
   const [continent, setContinent] = useState(null);
