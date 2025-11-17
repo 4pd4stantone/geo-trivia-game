@@ -73,12 +73,15 @@ export default function Population({game, setGame, movesLeft, setMovesLeft}) {
     })
     if (movesLeft > 1) {
       setMovesLeft(prev => prev - 1)
-    } else {
-      setMovesLeft(prev => prev - 1)
-      setGameOver(true)
+    } else if (movesLeft === 1) {
+      setMovesLeft(prev => prev - 1);
+      if (won) {
+        return
+      } else {
+         setGameOver(true)
+      }  
     }
   }
-
 
   function assignStatus(citiesWithImg) {
     const firstFive = citiesWithImg.slice(0,5)
