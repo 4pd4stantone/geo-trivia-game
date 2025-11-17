@@ -267,7 +267,7 @@ const getCityPics = async (cityName) => {
       </section> 
       :
       ("")}
-      {gameOver ?
+      {gameOver && !won ?
       <section id="game-over">
         <h1 id="game-over-title">Game Over</h1>
         <button onClick={handleGameOver} id="game-over-btn">Try Again</button>
