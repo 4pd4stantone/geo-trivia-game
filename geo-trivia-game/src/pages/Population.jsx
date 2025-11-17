@@ -161,6 +161,13 @@ const getCityPics = async (cityName) => {
     setGameOver(false);
     setMovesLeft(6)
   }
+    function handleWin () {
+    setGame(false)
+    setCities([]);
+    setWon(false);
+    setGameOver(false);
+    setMovesLeft(6)
+  }
  
   useEffect(() => {
     console.log(continent);
@@ -267,6 +274,7 @@ const getCityPics = async (cityName) => {
       {won ?
       <section id="won">
         <h1>Congratulations you have conquered {continent}!</h1>
+        <button onClick={handleWin} id="game-over-btn">Try Again</button>
       </section> 
       :
       ("")}
