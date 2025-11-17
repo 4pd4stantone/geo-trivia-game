@@ -1,19 +1,21 @@
 # GEO‑TRIVIA Games
+<img width="1922" height="679" alt="Screenshot 2025-11-16 at 10 16 33 PM" src="https://github.com/user-attachments/assets/a0962377-7d73-4e15-ad63-b3e6134a36be" />
 
 
 ## Live Site
 - Netlify: https://geo-trivia-game.netlify.app/
 Map. Guess. Conquer. Arrange five cities by population (left most populated to right least populated) to conquer each continent and earn medals.
+<img width="1918" height="796" alt="Screenshot 2025-11-16 at 10 17 02 PM" src="https://github.com/user-attachments/assets/b4e54273-03be-463e-9e8e-5f9513a67c5e" />
 
-![Screenshot](/mnt/data/Screenshot 2025-11-16 at 10.16.33 PM.png)
-![Screenshot](/mnt/data/Screenshot 2025-11-16 at 10.17.02 PM.png)
-![Screenshot](/mnt/data/Screenshot 2025-11-16 at 10.19.58 PM.png)
+
+
 
 ## Features
 - 6 continents: North America, South America, Europe, Africa, Asia, Australia
 - Drag‑and‑drop city cards
 - Victory banner and medals
 - Responsive layout, custom badges, and icons
+<img width="1919" height="759" alt="Screenshot 2025-11-16 at 10 19 58 PM" src="https://github.com/user-attachments/assets/d4e47c82-5392-4214-9507-a5d38f2742d7" />
 
 ## Tech Stack
 - React (often scaffolded with Vite)
