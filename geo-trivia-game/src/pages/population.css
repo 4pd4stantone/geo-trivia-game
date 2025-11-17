@@ -140,7 +140,6 @@ main {
     color: #1d3843;
     text-align: center;
     text-shadow: 1px 1px 1px #7aa363;
-    margin-top: -25px;
 }
 #game-over {
     display: flex;
