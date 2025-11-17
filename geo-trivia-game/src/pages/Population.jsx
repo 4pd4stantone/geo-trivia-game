@@ -230,7 +230,7 @@ const getCityPics = async (cityName) => {
         <section id="population-instructions">
           <h1>
             Select a continent, then arrange the five displayed cities by
-            population, from most populated (left) to least populated (right), in less than six moves.
+            population, from most populated (left) to least populated (right), in six moves or less.
           </h1>
         </section>
       ) : (
