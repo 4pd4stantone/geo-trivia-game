@@ -13,10 +13,23 @@ header {
 #geo-trivia-logo {
   width: 80px;
 }
-
-#moves-left {
+#moves-left{
+  display: flex;
+}
+#moves-left-logo {
   height: 70px;
   margin: 10px 0 0 10px;
+}
+#moves-left-number {
+    /* outline: 1px red solid; */
+    color: #1d3843;
+    position: relative;
+    top: 11px;
+    left: -28px;
+    font-size: 35px;
+     font-family: Courier, monospace;
+     margin: 0px;
+     padding: 0px;
 }
 #score {
   height: 70px;

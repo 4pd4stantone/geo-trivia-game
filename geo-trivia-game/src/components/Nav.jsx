@@ -2,13 +2,16 @@ import logo from '../assets/geo-trivia-logo.png'
 import movesLeft2 from '../assets/movesLeft2.png'
 import medals from '../assets/medals.png'
 
-export default function Nav() {
+export default function Nav({game, movesLeft}) {
 
     return (
         <>
             <nav>
-                <div>
-                    <img src={movesLeft2} alt="Moves Left" id='moves-left'/>
+                <div id='moves-left'>
+                    <img src={movesLeft2} alt="Moves Left" id='moves-left-logo'/>
+                    {game ?
+                    <span id="moves-left-number">{movesLeft}</span>
+                        : <></>}
                 </div>
                 <header>
                     <div>

@@ -1,7 +1,6 @@
 main {
     /* outline: 1px red solid; */
 }
-
 #continent-btns {
     display: flex;
     justify-content: space-evenly;
@@ -142,5 +141,31 @@ main {
     text-align: center;
     text-shadow: 1px 1px 1px #7aa363;
     margin-top: -25px;
+}
+#game-over {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+#game-over-title {
+    font-size: 50px;
+    font-family: Courier, monospace;
+    font-weight: 900;
+    color: #1d3843;
+    text-align: center;
+    text-shadow: 1px 1px 1px #7aa363;
+}
+#game-over-btn {
+    width: 100px;
+    height: 45px;
+    color: #f7eed1;
+    background-color: #417e82;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    font-weight: 800;
+    box-shadow: 5px 5px 3px #306067;
+    cursor: pointer;
 }
 

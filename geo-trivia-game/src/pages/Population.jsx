@@ -8,13 +8,12 @@ import smallPop from "../assets/smallPop.png"
 import Columns from "../components/Columns.jsx";
 import columnsArray from "../data/columnsArray.js";
 
-export default function Population() {
+export default function Population({game, setGame, movesLeft, setMovesLeft}) {
   const [continent, setContinent] = useState(null);
   const [cities, setCities] = useState([]);
-  const [game, setGame] = useState(false);
   const [won, setWon] = useState(false)
   const [conquered, setConquered] = useState([])
-
+  const [gameOver, setGameOver] = useState(false)
  
 
   // function to check correct order of population, from largest to smallest every time the drag and drop function is done.
@@ -72,7 +71,12 @@ export default function Population() {
     checkPopulation(updatedCities)
     return updatedCities
     })
- 
+    if (movesLeft > 1) {
+      setMovesLeft(prev => prev - 1)
+    } else {
+      setMovesLeft(prev => prev - 1)
+      setGameOver(true)
+    }
   }
 
 
@@ -146,8 +150,15 @@ const getCityPics = async (cityName) => {
     console.log(game);
     setGame(true);
   }
-  console.log(game);
-
+  function handleGameOver () {
+    setContinent(null);
+    setGame(false)
+    setCities([]);
+    setWon(false);
+    setGameOver(false);
+    setMovesLeft(6)
+  }
+ 
   useEffect(() => {
     console.log(continent);
     console.log(cities);
@@ -216,7 +227,7 @@ const getCityPics = async (cityName) => {
         <section id="population-instructions">
           <h1>
             Select a continent, then arrange the five displayed cities by
-            population, from most populated (left) to least populated (right).
+            population, from most populated (left) to least populated (right), in less than six moves.
           </h1>
         </section>
       ) : (
@@ -235,7 +246,7 @@ const getCityPics = async (cityName) => {
           </DndContext>
         </section>
       )}
-      {game && !won ?
+      {game && !won && !gameOver ?
       ( <section id="pop-img-section">
           <div id="left-pop-img">
             <img src={xlargePop} alt="Large Population" />
@@ -256,6 +267,14 @@ const getCityPics = async (cityName) => {
       </section> 
       :
       ("")}
+      {gameOver ?
+      <section id="game-over">
+        <h1 id="game-over-title">Game Over</h1>
+        <button onClick={handleGameOver} id="game-over-btn">Try Again</button>
+      </section> 
+      :
+      ("")}
+
     </main>
   );
 }
